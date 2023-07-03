@@ -39,7 +39,7 @@ function Projects(props) {
     onClick ={() => navigate(`/project/${project.redirectUrl}`)}>
     <Grid container columnSpacing={2} rowSpacing={5} style={{padding:20}} alignItems="center">
       <Grid item md={6} xs={12} sx = {{textAlign:{xs:'center', md:'left'}}} order={{xs:2, md:1}}>
-        <Box sx={{width:{md : '70%', xs: '65%'}, margin:'auto'}}>
+        <Box sx={{width:{md : '70%', xs: '95%'}, margin:'auto'}}>
           {project.title}
           <br/>
           {project.content}
@@ -64,7 +64,7 @@ function Projects(props) {
         <img src={project.image} alt='Crafts' style={{width:'50%', minWidth:375, objectFit:'cover', height:300, borderRadius:4}} />
       </Grid>
       <Grid item md={6} xs={12} sx = {{textAlign:{xs:'center', md:'left'}}} >
-        <Box sx={{width:{md : '70%', xs: '65%'}, margin:'auto'}}>
+        <Box sx={{width:{md : '70%', xs: '95%'}, margin:'auto'}}>
           {project.title}
           <br/>
           {project.content}
