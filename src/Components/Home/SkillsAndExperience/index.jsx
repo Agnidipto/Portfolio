@@ -11,8 +11,17 @@ import Avatar from '@mui/material/Avatar';
 import Rating from '@mui/material/Rating';
 import Slide from '@mui/material/Slide';
 import { useIsVisible } from '../../Utils/useIsVisible';
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
+import {LazyLoadImage} from 'react-lazy-load-image-component'
 
 function SkillsAndExperience(props) { 
+
+  const theme = useTheme();
+  const greaterThanMid = useMediaQuery(theme.breakpoints.up("md"));
+  // const smallToMid = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  // const lessThanSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
   const navigate = useNavigate()
 
@@ -32,30 +41,34 @@ function SkillsAndExperience(props) {
     {
       head: 'ReactJS',
       content: 'Considerable amount of experience and knowledge in ReactJS, including frameworks that support it (including Hooks, Redux, FramerMotion, etc). ',
-      image : require ("./SkillsImages/react.jpg"),
+      image : props.ReactImage,
       rating:4.5,
-      url:'/projects/ReactJS'
+      url:'/projects/ReactJS',
+      min : '/projects/reactmin.jpg'
     },
     {
       head: 'SpringBoot',
       content: 'Experienced in SpringBoot for Rest APIs, having worked in real-time Projects. Knowledge include, but not limited to, creating API Endpoints, Authorization with JWT, handling Multipart Data and Exception Handling. Experience include creation of Art-based Blog Channel, and Quiz Platform.',
-      image: require('./SkillsImages/spring-boot.jpg'),
+      image: props.SpringBootImage,
       rating:4,
-      url:'/projects/SpringBoot'
+      url:'/projects/SpringBoot',
+      min : '/projects/spring-bootmin.jpg'
     },
     {
       head: 'Java',
       content: 'Considerable amount of knowledge in Java, including building real-world Projects. Job Experience include creating Automations in client-based Projects, for reading and analyzing client data, and additional experience with Spring Boot.',
-      image: require('./SkillsImages/java.jpg'),
+      image: props.JavaImage,
       rating: 4,
-      url:'/projects/Java'
+      url:'/projects/Java',
+      min : '/projects/javamin.jpg'
     },
     {
       head: 'Python',
       content: 'Project-based Experience in Python, which include building APIs for Back-end. Frameworks/Library include FastAPI and Flask. Also Automation based Projects for Client, for reading and analyzing Client Data, as well as Selenium for running Automation test scenarios and accessing data.',
-      image: require('./SkillsImages/python.jpg'),
+      image: props.PythonImage,
       rating: 3.5,
-      url:'/projects/Python'
+      url:'/projects/Python',
+      min : '/projects/pythonmin.jpg'
     },
 
   ]
@@ -126,7 +139,7 @@ function SkillsAndExperience(props) {
         </Typography>
         
         <Grid container columnSpacing={2} rowSpacing={2} 
-        sx={{paddingLeft:'2%', paddingRight:'2%', minHeight:{xs:'750px', md:'380px'}}}  
+        sx={{paddingLeft:'2%', paddingRight:'2%', minHeight:{xs:'350px', md:'380px'}, transition:'all 0.5s ease'}}  
         alignItems="stretch" ref={skillsRef}>
         {SkillData.map((skill, index) => (
         <Slide in={isSkillsVisible} mountOnEnter unmountOnExit direction='right'
@@ -136,21 +149,26 @@ function SkillsAndExperience(props) {
             <Card sx={{ maxWidth: 345, margin:'auto', height:'100%', width:'100%'}} onClick={e => navigate(skill.url)}>
               <CardActionArea sx={{ padding:0}}>
                 <CardMedia
-                  component="img"
-                  // height="140"
-                  // style = {{ height: 0, paddingTop: '56%'}}
-                  image={skill.image}
-                  alt="green iguana"
+                  // component="img"
+                  // // height="140"
+                  // // style = {{ height: 0, paddingTop: '56%'}}
+                  // image={skill.image}
+                  // alt="green iguana"
+                  children = {<LazyLoadImage src = {skill.image} 
+                  PlaceholderSrc={skill.min}
+                  style={{width : '100%'}} alt={skill.head}/>}
                 />
-                <CardContent sx = {{minHeight:200}} >
+                <CardContent  >
                   <Box >
                   <Typography gutterBottom variant="h5" component="div">
                     {skill.head}
                   </Typography>
                   <Rating name="read-only" value={skill.rating} readOnly precision={0.5}/>
-                  <Typography variant="body2" color="text.secondary" >
+                  {greaterThanMid ? 
+                  <Typography variant="body2" color="text.secondary">
                     {skill.content}
                   </Typography>
+                  : <></>}
                   </Box>
                 </CardContent>
               </CardActionArea>

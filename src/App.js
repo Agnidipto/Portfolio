@@ -11,7 +11,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Collapse from '@mui/material/Collapse';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import HomeIcon from '@mui/icons-material/Home';
@@ -23,10 +22,14 @@ import Footer from '../src/Components/Footer';
 import ProjectPage from '../src/Components/ProjectPage';
 import ProjectInformation from './Information';
 
-
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import Drawer from '@mui/material/Drawer';
+
+const ReactImage = require('./Components/Home/SkillsAndExperience/SkillsImages/react.jpg')
+const SpringBootImage = require('./Components/Home/SkillsAndExperience/SkillsImages/spring-boot.jpg')
+const JavaImage = require('./Components/Home/SkillsAndExperience/SkillsImages/java.jpg')
+const PythonImage = require('./Components/Home/SkillsAndExperience/SkillsImages/python.jpg')
 
 const Projects = lazy(() => import('./Components/Projects'));
 
@@ -34,8 +37,12 @@ const LazyLoading = (<Box sx={{ display: 'flex' }}>
 <CircularProgress />
 </Box>)
 
-const LazyLoadingFull = (<Box sx={{ display: 'flex', height:'110vh', marginTop:'-10vh' }} className='container'>
-<CircularProgress className='centered'/>
+const LazyLoadingFull = (<Box sx={{height:'100vh', marginTop:'-65px' }} className='container'>
+  <div className='container' style={{height:'100%'}}>
+    <div className='centered'>
+      <CircularProgress/>
+    </div>
+  </div>
 </Box>)
 
 var skills = ['All']
@@ -123,7 +130,7 @@ function App() {
     setDrawer(open)
   };
 
-  const homeNavigations = ['Skills', 'Projects', 'About Me']
+  const homeNavigations = [ 'Projects', 'Skills','About Me']
 
   const homeNavigationOnClick = (page) => {
     if(page==='Skills') {
@@ -241,7 +248,8 @@ function App() {
           {loading ? (<>{LazyLoadingFull}</>) : (<>
           <Routes>
             <Route path="/" element={<Home LazyLoading = {LazyLoading} 
-            projectRef={projectRef} skillsAndExperienceRef={skillsAndExperienceRef} aboutMeRef={aboutMeRef}/>}/>
+            projectRef={projectRef} skillsAndExperienceRef={skillsAndExperienceRef} aboutMeRef={aboutMeRef}
+            ReactImage={ReactImage} SpringBootImage={SpringBootImage} JavaImage={JavaImage} PythonImage={PythonImage} />}/>
             <Route path="/projects" element={
               <Suspense fallback={LazyLoadingFull}>
                 <Projects LazyLoading = {LazyLoading} />

@@ -1,59 +1,102 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {Typography} from '@mui/material';
 import { ParallaxBanner } from 'react-scroll-parallax';
+import {
+  motion,
+  useScroll,
+  useTransform
+} from "framer-motion";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
+import { useTheme } from "@mui/material/styles";
+
+function useParallax(value, distance) {
+  return useTransform(value, [0, 1], [0, 500]);
+}
 
 function Banner(props) {
 
-  const [loading, setLoading] = useState(false);
+  const ref= useRef();
 
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
+  const { scrollYProgress } = useScroll({ target: ref });
 
-  return (
-    <ParallaxBanner 
+  const distancey1 = 100 + ((props.length-1) * 200)
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, distancey1]);
+
+  const distancey2 = 100 + ((props.length-1) * 100)
+
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, distancey2]);
+
+  const distancey3 = 100 + ((props.length-1) * 200)
+
+  const y3 = useTransform(scrollYProgress, [0, 1], [-100, distancey3]);
+
+  return (<>
+    <ParallaxBanner ref={ref}
         layers={[
-          { image: require('./BannerImages/back.png'), speed: -20 },
           {
-            speed: -10,
             children: (
-              <div className="absolute inset-0 flex items-center justify-center background-down"
-              style={{ width:'100%', marginTop:300, height:'550px'}}
+            <div style={{background: 'linear-gradient(to right, #180d3c, #2d093d)', width:'100%', height:'100%'}}/>
+          )},
+          {
+            children: (
+              <motion.div className="background-down"
+              style={{y:y2, minWidth:'2000px', width:'100%', marginTop:300, height:550,}}
               >
                 {/* <img src={require('./BannerImages/xyz.png')} alt='' 
                 style={{minWidth:'1500px', width:'100%', display:'block', margin:'auto'}}/> */}
-              </div>
+              </motion.div>
             ),
           },
           {
-            speed: -30,
             children: (
-              <div className="absolute inset-0 flex items-center justify-center background-up"
-              style={{ width:'100%', marginTop:-300, height:750}}
+              <motion.div className="background-up"
+              style={{y:y3, minWidth:'2000px', width:'100%', marginTop:-400, height:750}}
               >
                 {/* <img src={require('./BannerImages/xyz.png')} alt='' 
                 style={{minWidth:'1500px', width:'100%', display:'block', margin:'auto'}}/> */}
-              </div>
+              </motion.div>
             ),
           },
           {
-            speed: -35,
+            // translateY:[-60, 20],
             children: (
-              <div className="absolute inset-0 flex items-center justify-center centered"
-              style={{marginTop:-100}}
+              <motion.div
+              style={{y:y1, height:'100%'}}
               >
+                <div className='centered' style={{marginTop:''}}>
+                {props.skill? <Typography variant = 'h2' color='#aaa' sx={{textShadow : '4px 4px 8px #222;'}}>
+                  {props.skill.charAt(0).toUpperCase() + props.skill.slice(1)+' '}
+                </Typography> : <></>}
                 <Typography variant = 'h1' color='#aaa' sx={{textShadow : '4px 4px 8px #222;'}}>
-                  {props.skill? props.skill.charAt(0).toUpperCase() + props.skill.slice(1)+' ' : ''}Projects
-                </Typography>
+                Projects
+                </Typography> 
               </div>
+              </motion.div>
             ),
           },
         ]}
         style={{minHeight:'520px', height:'60vh'}}
+        className='container'
       />
+      {/* <section>
+        <div className='framer-container' ref={ref}>
+          <motion.div className="box" style={{ y: y1 }} />
+          <motion.h2
+            className="box"
+            style={{ y: y2}}
+          >Hello</motion.h2>
+          <div className="absolute inset-0 flex items-center justify-center"
+          style={{ width:'100%', zIndex:-100}}>
+            <img src={require('./BannerImages/down.png')} style={{zIndex:-1,  width:'100%', zIndex:1, height:'10%'}}/>
+          </div>
+          <motion.div className="absolute inset-0 flex items-center justify-center background-up"
+          style={{ width:'100%', marginTop:-300, height:750}}
+          />
+        </div>
+      </section> */}
+    </>
   )
 }
 

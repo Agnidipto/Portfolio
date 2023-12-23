@@ -13,14 +13,14 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
   bgcolor: 'background.paper',
   border: '1px solid #000',
   borderRadius:'4px',
   boxShadow: 24,
   p: 4,
   color: 'white',
-  textAlign: 'center'
+  textAlign: 'center',
+  width:{xs:300, md:400}
 };
 
 function AboutMe(props) { 
@@ -42,7 +42,7 @@ function AboutMe(props) {
 
   return (
     <div>
-      <Box sx={{paddingLeft:10, paddingRight:10}}>
+      <Box sx={{paddingLeft:{md: 10, xs:5}, paddingRight:{md: 10, xs:5}}}>
         
         <Grid container justifyContent="center" alignItems="center" rowSpacing={5} sx={{marginTop : 5, paddingBottom:5}}>
           <Grid item lg={6}>

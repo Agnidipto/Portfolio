@@ -13,7 +13,6 @@ import Divider from '@mui/material/Divider';
 
 import { useNavigate } from "react-router-dom";
 
-const pages = ['Projects'];
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar(props) {
@@ -86,7 +85,7 @@ function ResponsiveAppBar(props) {
             Agnidipto Sinha
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, marginTop:1 }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, marginTop:1, marginLeft:1 }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -95,7 +94,7 @@ function ResponsiveAppBar(props) {
               onClick={props.toggleDrawer(true)}
               color="inherit"
             >
-              <MenuIcon />
+              <MenuIcon style={{marginLeft:-20}}/>
             </IconButton>
           </Box>
           {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
@@ -103,9 +102,8 @@ function ResponsiveAppBar(props) {
             variant="h5"
             noWrap
             component="a"
-            href="/"
             sx={{
-              mr: 2,
+              // mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
               fontWeight: 700,
@@ -114,7 +112,7 @@ function ResponsiveAppBar(props) {
               textDecoration: 'none',
             }}
           >
-            Agnidipto Sinha 
+            <span onClick={(e) => navigate('/')} style={{cursor:'pointer'}}>Agni</span> 
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {props.location !== '/' ?
@@ -126,16 +124,16 @@ function ResponsiveAppBar(props) {
             </Button>: 
             <>
               <Button
-              onClick={(e) => SkillButtonOnClick(e)}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Skills
-              </Button>
-              <Button
               onClick={(e) => ProjectButtonOnClick(e)}
               sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 Projects
+              </Button>
+              <Button
+              onClick={(e) => SkillButtonOnClick(e)}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Skills
               </Button>
               <Button
               onClick={(e) => AboutButtonOnClick(e)}
@@ -161,7 +159,7 @@ function ResponsiveAppBar(props) {
               }}
             >
                 {props.skills.map((text, index) => (
-                  <>
+                  <div>
                   <MenuItem key={index} disablePadding onClick={e=> {
                     e.preventDefault()
                     setAnchorElProjects(null);
@@ -169,7 +167,7 @@ function ResponsiveAppBar(props) {
                     {text}
                   </MenuItem>
                   {text === 'All' ? <Divider sx={{borderColor : 'rgb(255 255 255 / 77%)'}}/>:<></>}
-                  </>
+                  </div>
                 ))}
             </Menu>
             

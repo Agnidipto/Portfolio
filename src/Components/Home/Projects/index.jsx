@@ -1,13 +1,17 @@
 import {useState} from 'react';
-import {Grid, Box, Typography} from '@mui/material';
+import {Grid, Box, Typography, ButtonBase, Button} from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import TimelineComponent from '../../Utils/TimelineComponent';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Fade from 'react-reveal/Fade';
+import { useNavigate } from "react-router-dom";
 
 function Projects(props) { 
+
+  const navigate = useNavigate()
 
   const [expanded, setExpanded] = useState(false);
   const [expandedSmall, setExpandedSmall] = useState('capgemini');
@@ -53,9 +57,12 @@ function Projects(props) {
           </Typography>
         </Fade>
         <Fade >
-        <Grid container columnSpacing={2} rowSpacing={5} style={{padding:20}} alignItems="center">
+        <Grid container columnSpacing={2} rowSpacing={5} sx={{padding:{md:'20px 50px 20px 50px', xs:'20px 2% 20px 2%'}}}
+        alignItems="center">
           <Grid item md={6} xs={12} sx = {{textAlign:{xs:'center', md:'left'}}} order={{xs:2, md:1}}>
-            <Box sx={{width:{md : '70%', xs: '65%'}, margin:'auto'}}>
+            <ButtonBase sx={{fontSize:'1rem', textAlign:{xs:'center', md:'left'},  lineHeight:'1.4', paddingTop:2, paddingBottom:2, wordSpacing:1.2, width:'100%', borderRadius:'10px', transition:'background-color 0.1s linear', '&:hover' : {background:'#28262f'}}} 
+            focusRipple={true} onClick={e => navigate('./project/1')}>
+            <Box sx={{width:{md : '70%', xs: '90%'}, margin:'auto'}}>
               <Typography variant='h3' color='secondary.light'>
                 Art-Blog Channel
               </Typography>
@@ -66,6 +73,7 @@ function Projects(props) {
                 Heroku was used for hosting it initially.
               </Typography>
             </Box>
+            </ButtonBase>
           </Grid>
           <Grid item md={6} xs={12} order={{xs:1, md:2}}>
             <img src={require('./ProjectsImages/crafts.jpg')} alt='Crafts' style={{width:'50%', minWidth:375, objectFit:'cover', height:300, borderRadius:4}} />
@@ -74,12 +82,15 @@ function Projects(props) {
         <br/> <hr style={{width:'85%', borderColor:'grey'}}/> <br/> 
         </Fade>
         <Fade >
-        <Grid container columnSpacing={2} rowSpacing={5} style={{padding:20}} alignItems="center">
+        <Grid container columnSpacing={2} rowSpacing={5} sx={{padding:{md:'20px 50px 20px 50px', xs:'20px 2% 20px 2%'}}} 
+        alignItems="center">
           <Grid item md={6} xs={12} >
             <img src={require('./ProjectsImages/houses.jpg')} alt='Crafts' style={{width:'50%', minWidth:375, objectFit:'cover', height:300, borderRadius:4}} />
           </Grid>
           <Grid item md={6} xs={12} sx = {{textAlign:{xs:'center', md:'left'}}} >
-            <Box sx={{width:{md : '70%', xs: '65%'}, margin:'auto'}}>
+            <ButtonBase sx={{fontSize:'1rem', textAlign:{xs:'center', md:'left'},  lineHeight:'1.4', paddingTop:2, paddingBottom:2, wordSpacing:1.2, width:'100%', borderRadius:'10px', transition:'background-color 0.1s linear', '&:hover' : {background:'#28262f'}}} 
+            focusRipple={true} onClick={e => navigate('./project/2')}>
+            <Box sx={{width:{md : '70%', xs: '90%'}, margin:'auto'}}>
               <Typography variant='h3' color='secondary.light'>
                 Real-Estate Price Prediction
               </Typography>
@@ -88,14 +99,19 @@ function Projects(props) {
                 Website Created for Predicting the House Prices in a city using Machine Learning. We used different regression models in the backend. Out of all the models we tried, turns out that multiple linear regression performed the best, hence we decided to go forward with it.
               </Typography>
             </Box>
+            </ButtonBase>
           </Grid>
         </Grid>
         <br/> <hr style={{width:'85%', borderColor:'grey'}}/> <br/> 
         </Fade>
         <Fade >
-        <Grid container columnSpacing={2} rowSpacing={5} style={{padding:20}} alignItems="center">
+        <Grid container columnSpacing={2} rowSpacing={5} 
+        sx={{padding:{md:'20px 50px 20px 50px', xs:'20px 2% 20px 2%'}}}
+        alignItems="center">
           <Grid item md={6} xs={12} sx = {{textAlign:{xs:'center', md:'left'}}} order={{xs:2, md:1}}>
-            <Box sx={{width:{md : '70%', xs: '65%'}, margin:'auto'}}>
+            <ButtonBase sx={{fontSize:'1rem', textAlign:{xs:'center', md:'left'},  lineHeight:'1.4', paddingTop:2, paddingBottom:2, wordSpacing:1.2, width:'100%', borderRadius:'10px', transition:'background-color 0.1s linear', '&:hover' : {background:'#28262f'}}} 
+            focusRipple={true} onClick={e => navigate('./project/3')}>
+            <Box sx={{width:{md : '70%', xs: '90%'}, margin:'auto'}}>
               <Typography variant='h3' color='secondary.light'>
                 Investment Portfolio
               </Typography>
@@ -105,12 +121,20 @@ function Projects(props) {
                 There are API Calls to 5Paisa API in back-end. And used a localized SQLite DB for Temporary Storage. The Visual graphs were made using React-vis, RechartJS and Apex Charts.
               </Typography>
             </Box>
+            </ButtonBase>
           </Grid>
           <Grid item md={6} xs={12} order={{xs:1, md:2}}>
             <img src={require('./ProjectsImages/investments.jpg')} alt='Crafts' style={{width:'50%', minWidth:375, objectFit:'cover', height:300, borderRadius:4}} />
           </Grid>
         </Grid>
-        <br/> <hr style={{width:'85%', borderColor:'grey'}}/> <br/> 
+        <br/> 
+        <hr style={{width:'85%', borderColor:'grey'}}/> 
+        
+        </Fade>
+        <Fade>
+          <Button variant="contained" color='primary' sx={{background:'#1e1e1e', height:'50px', color:'white', fontSize:'15px', width:'85%', marginTop:'15px', marginBottom:'15px'}} onClick={(e) => navigate('/projects')}>
+            View All Projects {'  '}<ArrowForwardIcon sx={{marginLeft:1, fontSize:'20px', marginBottom:0.3}}/>
+          </Button><hr style={{width:'85%', borderColor:'grey'}}/> <br/>
         </Fade>
 
         <Fade>

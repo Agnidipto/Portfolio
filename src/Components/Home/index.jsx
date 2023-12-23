@@ -25,9 +25,11 @@ function Home(props) {
     const [headerText, setHeaderText] = useState(0);
 
     const containerRef = useRef()
+    const [opacity, setOpacity] = useState(0)
 
     useEffect(() => {
         window.scrollTo(0, 0)
+        setOpacity(1)
     }, [])
 
     useEffect(() => {
@@ -79,7 +81,7 @@ function Home(props) {
             >
                 <Slide in={true} direction='up' container={containerRef.current}
                 {...( { timeout: 700 })}>
-              <div className="glass-effect" style={{borderRadius:'4px', height:'92%'}}>
+              <div className="glass-effect" style={{borderRadius:'4px', height:'92%', opacity:opacity}}>
                 <Grid container spacing={2} style={{padding:20}}>
                   <Grid item xs={12} md={10}>
                     <div style={{textAlign:'left'}}>
@@ -164,7 +166,11 @@ function Home(props) {
             <br/> <hr style={{width:'95%'}}/>
             <div ref={props.skillsAndExperienceRef} style={{scrollMargin:'100px'}}>
                 <Suspense fallback={props.LazyLoading}>
-                    <SkillsAndExperience />
+                    <SkillsAndExperience 
+                    ReactImage={props.ReactImage} 
+                    SpringBootImage={props.SpringBootImage} 
+                    JavaImage={props.JavaImage} 
+                    PythonImage={props.PythonImage}/>
                 </Suspense>
             </div>
             <br/> <hr style={{width:'95%'}}/>
