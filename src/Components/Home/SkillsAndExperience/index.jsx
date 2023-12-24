@@ -14,7 +14,8 @@ import { useIsVisible } from '../../Utils/useIsVisible';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-import {LazyLoadImage} from 'react-lazy-load-image-component'
+import CircularProgress from '@mui/material/CircularProgress';
+// import Box from '@mui/material/Box';
 
 function SkillsAndExperience(props) { 
 
@@ -30,6 +31,8 @@ function SkillsAndExperience(props) {
   const skillsRef = useRef();
   
   const tempVisible = useIsVisible(skillsRef)
+
+  const [imageLoad, setImageLoad] = useState({})
 
   useEffect(() => {
     if (isSkillsVisible) setIsSkillsVisible(true)
@@ -149,14 +152,13 @@ function SkillsAndExperience(props) {
             <Card sx={{ maxWidth: 345, margin:'auto', height:'100%', width:'100%'}} onClick={e => navigate(skill.url)}>
               <CardActionArea sx={{ padding:0}}>
                 <CardMedia
-                  // component="img"
-                  // // height="140"
-                  // // style = {{ height: 0, paddingTop: '56%'}}
-                  // image={skill.image}
-                  // alt="green iguana"
-                  children = {<LazyLoadImage src = {skill.image} 
-                  PlaceholderSrc={skill.min}
-                  style={{width : '100%'}} alt={skill.head}/>}
+                  children = {<>
+                     <Box sx={{ display: imageLoad[skill.head]? 'none' : 'flex', height:125, justifyContent:'center', alignItems: 'center' }}>
+                      <CircularProgress />
+                    </Box>
+                    <img src={skill.image} style={{display: imageLoad[skill.head]? '' : 'none', height:125}} alt={skill.head}
+                    onLoad={() => setImageLoad({...imageLoad, [skill.head] : true})}/>
+                  </>}
                 />
                 <CardContent  >
                   <Box >
