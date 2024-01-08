@@ -59,14 +59,14 @@ function AboutMe(props) {
             Find my contact information below if you do need to contact me for working together, hire me, or just have any inquiry! <br/> <br/>
             Happy hacking, folks!
             </Typography>
-            <Grid container columnSpacing={2} sx={{marginTop:2}}>
+            {/* <Grid container columnSpacing={2} sx={{marginTop:2}}>
               <Grid item xs={6}>
                 <Button variant="contained" color='primary' sx={{background:'#303030', color:'white', width:'100%', marginTop:'10px'}} onClick={handleOpen}>Contact</Button>
               </Grid>
               <Grid item xs={6}>
                 <Button variant="contained" color='primary' sx={{background:'#303030', color:'white', width:'100%', marginTop:'10px'}} href='mailto:agnidipto12.25@gmail.com'>Email</Button>
               </Grid>
-            </Grid>
+            </Grid> */}
             </Box>
           </Grid>
         </Grid>

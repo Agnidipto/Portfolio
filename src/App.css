@@ -5,14 +5,79 @@
   color:white;
 }
 
-.glass-effect {
-background: rgba(56, 56, 56, 0.11);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(13.2px);
--webkit-backdrop-filter: blur(13.2px);
-border: 1px solid rgba(174, 174, 174, 0.08);
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  perspective: 1px;
+  transform-style: preserve-3d;
 }
+
+/* Container holding the image and the text */
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+/* Bottom left text */
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+/* Top left text */
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+/* Top right text */
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+/* Bottom right text */
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centered-wide {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-30%, -50%);
+}
+
+.left {
+  position: absolute;
+  top: 50%;
+  left: 9%;
+  transform: translate(0%, -50%);
+}
+
+.right {
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+}
+
+
 
 .cont {
   margin: 0;
@@ -105,4 +170,29 @@ border: 1px solid rgba(174, 174, 174, 0.08);
   background: linear-gradient(to right, #180d3c, #2d093d);
   color: #fff;
   padding-top: 320px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  /* width: 20px; */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #49484c;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #8579ad;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b4afc5;
+}
+
+.MuiSnackbar-root .MuiPaper-root {
+  background:rgb(49, 49, 49);
+  color:white
 }

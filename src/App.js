@@ -1,58 +1,23 @@
 import './App.css';
-import {useState, useEffect, lazy, Suspense, useRef} from 'react';
-import {Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { ParallaxProvider } from 'react-scroll-parallax';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Collapse from '@mui/material/Collapse';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import HomeIcon from '@mui/icons-material/Home';
-import WorkIcon from '@mui/icons-material/Work';
+import {useState, useRef, useEffect} from 'react';
+import {Routes, Route, Navigate, useLocation, useNavigate} from "react-router-dom";
 
 import TopBar from '../src/Components/TopBar';
+import SideDrawer from './Components/SideDrawer';
 import Home from '../src/Components/Home';
 import Footer from '../src/Components/Footer';
 import ProjectPage from '../src/Components/ProjectPage';
-import ProjectInformation from './Information';
+import Projects from './Components/Projects';
+import InitialLoad from './Components/InitialLoad';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-import Drawer from '@mui/material/Drawer';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadPage, unloadPage, changeLoad } from './reducers/initloadSlice';
 
 const ReactImage = require('./Components/Home/SkillsAndExperience/SkillsImages/react.jpg')
 const SpringBootImage = require('./Components/Home/SkillsAndExperience/SkillsImages/spring-boot.jpg')
 const JavaImage = require('./Components/Home/SkillsAndExperience/SkillsImages/java.jpg')
 const PythonImage = require('./Components/Home/SkillsAndExperience/SkillsImages/python.jpg')
-
-const Projects = lazy(() => import('./Components/Projects'));
-
-const LazyLoading = (<Box sx={{ display: 'flex' }}>
-<CircularProgress />
-</Box>)
-
-const LazyLoadingFull = (<Box sx={{height:'100vh', marginTop:'-65px' }} className='container'>
-  <div className='container' style={{height:'100%'}}>
-    <div className='centered'>
-      <CircularProgress/>
-    </div>
-  </div>
-</Box>)
-
-var skills = ['All']
-ProjectInformation.map((project) => {
-  project.skills.map(skill => {
-    if (!skills.includes(skill))
-      skills= [...skills, skill];
-  })
-})
-console.log(skills);
 
 const theme = createTheme({
   palette: {
@@ -90,38 +55,15 @@ const theme = createTheme({
 
 function App() {
 
-  const navigate = useNavigate();
-
   const projectRef = useRef(null);
   const skillsAndExperienceRef = useRef(null);
   const aboutMeRef = useRef(null);
 
-  const location = useLocation();
-  const [loading, setLoading] = useState(false);
   const [drawer, setDrawer] = useState(false);
-  const [projectOpen, setProjectOpen] = useState(false);
-  const [homeOpen, setHomeOpen] = useState(true);
 
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const handleScroll = () => {
-      const position = window.pageYOffset;
-      setScrollPosition(position);
-  }; 
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-        window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    console.log('location change')
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false)
-    }, 500)
-  }, [location])
+  const initLoad = useSelector(state => state.initload.value)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -130,143 +72,42 @@ function App() {
     setDrawer(open)
   };
 
-  const homeNavigations = [ 'Projects', 'Skills','About Me']
-
-  const homeNavigationOnClick = (page) => {
-    if(page==='Skills') {
-      if(skillsAndExperienceRef.current !== undefined ) {
-        skillsAndExperienceRef.current.scrollIntoView({
-          // behavior: 'smooth'
-        })
-      }
+  useEffect(() => {
+    if(initLoad) {
+      navigate('/')
     }
-    if(page==='Projects') {
-      if(projectRef.current !== undefined ) {
-        projectRef.current.scrollIntoView({
-          // behavior: 'smooth'
-        })
-      }
-    }
-    if(page==='About Me') {
-      if(aboutMeRef.current !== undefined ) {
-        aboutMeRef.current.scrollIntoView({
-          // behavior: 'smooth'
-        })
-      }
-    }
-  }
+  }, [initLoad])
 
-  const list = () => (
-    <Box
-      width={250}
-      role="presentation"
-      onKeyDown={toggleDrawer(false)}
-      
-    >
-      <List sx={{width:'100%'}}>
-      {location.pathname !== '/' ?
-      <ListItemButton onClick={() => {
-        setDrawer(false)
-        setHomeOpen(true)
-        navigate('/')}}>
-        <ListItemIcon>
-          <HomeIcon />
-        </ListItemIcon>
-        <ListItemText primary="Home" />
-      </ListItemButton>
-      : <>
-      <ListItemButton onClick={() => setHomeOpen(!homeOpen)}>
-        <ListItemIcon>
-          <HomeIcon />
-        </ListItemIcon>
-        <ListItemText primary="Home" />
-        {homeOpen ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={homeOpen} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-        {homeNavigations.map((page, index) => (
-          <>
-          <ListItem disablePadding key={index} >
-            <ListItemButton sx={{ pl: 4 }} onClick={e=> {
-              e.preventDefault()
-              homeNavigationOnClick(page)
-              setDrawer(false);
-              }}>
-              <ListItemText primary={page} />
-            </ListItemButton>
-          </ListItem>
-          </>
-        ))}
-      </List> 
-      </Collapse>
-      </>}
-      <Divider sx={{borderColor : 'rgb(255 255 255 / 77%)', marginTop:'10px', marginBottom:'10px'}}/>
-
-      <ListItemButton onClick={() => setProjectOpen(!projectOpen)}>
-        <ListItemIcon>
-          <WorkIcon />
-        </ListItemIcon>
-        <ListItemText primary="Projects" />
-        {projectOpen ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={projectOpen} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-        {skills.map((text, index) => (
-          <>
-          <ListItem key={text} disablePadding >
-            <ListItemButton sx={{ pl: 4 }} onClick={e=> {
-              e.preventDefault()
-              setDrawer(false);
-              text==='All'? navigate('/projects') : navigate(`/projects/${text}`)}}>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-          {text === 'All' ? <Divider sx={{borderColor : 'rgb(255 255 255 / 77%)', width:'90%', margin:'auto'}}/>:<></>}
-          </>
-        ))}
-      </List> 
-      </Collapse>
-      </List>
-    </Box>
-  );
+  // useEffect(() => {
+  //   dispatch(loadPage())
+  // }, [])
 
   return (
     <ThemeProvider theme={theme}>
-    <ParallaxProvider>
       <div className="App">
-          <TopBar positionTop={scrollPosition} toggleDrawer={toggleDrawer} skills={skills} location={location.pathname}
+          <TopBar toggleDrawer={toggleDrawer} 
           projectRef={projectRef} skillsAndExperienceRef={skillsAndExperienceRef} aboutMeRef={aboutMeRef}/> 
-          <Drawer
-            anchor={'left'}
-            open={drawer}
-            onClose={toggleDrawer(false)}
-            sx={{width:'50%'}}
-            id='boardslist'
-          >
-            {list()}
-          </Drawer>
-          {loading ? (<>{LazyLoadingFull}</>) : (<>
-          <Routes>
-            <Route path="/" element={<Home LazyLoading = {LazyLoading} 
-            projectRef={projectRef} skillsAndExperienceRef={skillsAndExperienceRef} aboutMeRef={aboutMeRef}
-            ReactImage={ReactImage} SpringBootImage={SpringBootImage} JavaImage={JavaImage} PythonImage={PythonImage} />}/>
-            <Route path="/projects" element={
-              <Suspense fallback={LazyLoadingFull}>
-                <Projects LazyLoading = {LazyLoading} />
-              </Suspense>
-            }/>
-            <Route path="/projects/:skill" element={
-              <Suspense fallback={LazyLoadingFull}>
-                <Projects LazyLoading = {LazyLoading} />
-              </Suspense>
-            }/>
-            <Route path='/project/:id' element ={<ProjectPage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-          </>)}
-        <Footer />
+
+          <SideDrawer 
+          drawer={drawer} setDrawer={setDrawer} toggleDrawer={toggleDrawer} 
+          skillsAndExperienceRef={skillsAndExperienceRef} projectRef={projectRef} aboutMeRef={aboutMeRef}/>
+
+          {initLoad? <InitialLoad /> : 
+          <>
+            <Routes>
+              <Route path="/" element={<Home 
+              projectRef={projectRef} skillsAndExperienceRef={skillsAndExperienceRef} aboutMeRef={aboutMeRef}
+              ReactImage={ReactImage} SpringBootImage={SpringBootImage} JavaImage={JavaImage} PythonImage={PythonImage} />}/>
+              <Route path="/projects" element={<Projects />}/>
+              <Route path="/projects/:skill" element={<Projects/>}/>
+              <Route path='/project/:id' element ={<ProjectPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+            <Footer />
+          </>}
+
+        
       </div>
-    </ParallaxProvider>
     </ThemeProvider>
   );
 }

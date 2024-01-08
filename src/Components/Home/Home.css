@@ -1,49 +1,46 @@
-/* Container holding the image and the text */
-.container {
-    position: relative;
-    text-align: center;
-    color: white;
-  }
-  
-  /* Bottom left text */
-  .bottom-left {
-    position: absolute;
-    bottom: 8px;
-    left: 16px;
-  }
-  
-  /* Top left text */
-  .top-left {
-    position: absolute;
-    top: 8px;
-    left: 16px;
-  }
-  
-  /* Top right text */
-  .top-right {
-    position: absolute;
-    top: 8px;
-    right: 16px;
-  }
-  
-  /* Bottom right text */
-  .bottom-right {
-    position: absolute;
-    bottom: 8px;
-    right: 16px;
-  }
-  
-  /* Centered text */
-  .centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+
+.glass-effect {
+  background: rgba(56, 56, 56, 0.11);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(13.2px);
+  -webkit-backdrop-filter: blur(13.2px);
+  border: 1px solid rgba(174, 174, 174, 0.08);
+  transition: all 0.7s ease-in
   }
 
-  .centered-wide {
-    position: absolute;
-    top: 50%;
-    left: 40%;
-    transform: translate(-30%, -50%);
-  }
+.header-image {
+  width:100%;
+  height: 100vh; 
+  margin-top: -65px; 
+  object-fit: cover; 
+  min-height: 700px;
+  transition: opacity 1.5s ease-in
+}
+
+.transition-ease-in {
+  transition: all 1s ease-in
+}
+
+.header-button {
+  width:100%;
+  height:3em;
+  /* opacity:0.5; */
+  background-color: rgba(144, 138, 170, 0.1) !important;
+}
+
+.header-button:hover {
+  background-color: rgba(59, 50, 97, 0.5) !important;
+}
+
+.linkedin-button:hover {
+  color : #0077b5;
+}
+
+.gmail-button:hover {
+  color : #c71610;
+}
+
+.github-button:hover {
+  color : white
+}

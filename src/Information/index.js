@@ -29,8 +29,7 @@ const ProjectInformation = [
     image : require('./ProjectsImages/crafts.jpg'),
     content : <Typography variant='p' sx={{fontSize:16}} >
     Website created for showcasing the Portfolio of Arts and Crafts that is made by the Client. <br/>
-    React was used for front-end, alongwith Semantic for styling/designing. Spring Boot was used for creating the APIs for back-end, and PostsgreSQL for Database. <br/>
-    Heroku was used for hosting it initially.
+    React was used for front-end, alongwith Semantic for styling/designing. Spring Boot was used for creating the APIs for back-end, and PostsgreSQL for Database.
     </Typography>,
     redirectUrl : '1',
     skills : ['ReactJS', 'SpringBoot', 'Java', 'NodeJS', 'SemanticUI', 'Git', 'Redux'],
@@ -119,7 +118,7 @@ const ProjectInformation = [
     image : require('./ProjectsImages/investments.jpg'),
     content : <Typography variant='p' sx={{textAlign:'left', fontSize:16}}>
     Self-Project for viewing and analyzing Investments made in Stock Market, including various types of visual representation of data. Application built in React, with Back-End using Flask. <br/>
-    There are API Calls to 5Paisa API in back-end. And used a localized SQLite DB for Temporary Storage. The Visual graphs were made using React-vis, RechartJS and Apex Charts.
+    The Visual graphs were made using React-vis, RechartJS and Apex Charts.
     </Typography>,
     redirectUrl : '3',
     skills : ['ReactJS', 'Flask', 'Python', 'Bootstrap', 'Git', 'React-Vis', 'RechartJS', 'Apex Charts'],
@@ -166,61 +165,64 @@ const ProjectInformation = [
         </>
     }
   },
-  {
-    id:3,
-    title : <Typography variant='h3' color='secondary.light'>
-      Investment Portfolio
-    </Typography>,
-    image : require('./ProjectsImages/investments.jpg'),
-    content : <Typography variant='p' sx={{textAlign:'left', fontSize:16}}>
-    Self-Project for viewing and analyzing Investments made in Stock Market, including various types of visual representation of data. Application built in React, with Back-End using Flask. <br/>
-    There are API Calls to 5Paisa API in back-end. And used a localized SQLite DB for Temporary Storage. The Visual graphs were made using React-vis, RechartJS and Apex Charts.
-    </Typography>,
-    redirectUrl : '3',
-    skills : ['ReactJS', 'Flask', 'Python', 'Bootstrap', 'Git', 'React-Vis', 'RechartJS', 'Apex Charts'],
-    fullContent : {
-      title : <Typography variant = 'h2' color='secondary-light'>Investment Portfolio</Typography>,
-      description : <Typography variant='p'>
-        This was a Self Project that I came up with. This Web App is a visual representation of current and past <span style={purpleStyle}>Indian Stock Market Data</span>, along with Visual Representation of the Holdings that are currently owned by me. 
-        <br/><br/>
-        This Project was mainly required to perform Portfolio Analysis for myself based on Stock Market Data (NSE). Since I use <span style={purpleStyle}>5Paisa</span> as a Broker, I have used their <span style={purpleStyle}>Python SDK</span> in backend for acquiring the data. They also have APIs accessed via URLs and Node SDK as well, however I have used the Python SDK for two reasons : <br/> 
-        <ol>
-          <li>The SDK for NodeJS is not as good, with extremely limited functionality, and subpar documentation.</li><br/>
-          <li>My Choice for backend before going into the depths of the Project was <span style={purpleStyle}>Flask</span>. So an SDK for Python would have been a seamless experience, as compared to calling URLs. Besides, the Documentation for the Python SDK is quite good, might be even better than the URL based API itself.</li>
-        </ol>
-      </Typography>,
-      features : <ul>
-      <li><span style={purpleStyle}>Holding Details:</span> Quantity of a Particular stock, it's current Price, Cost, P/L Percentage and Amount etc. </li>
-      <br/>
-      <li><span style={purpleStyle}>Portfolio details:</span> How much of my total Portfolio is covered by a particular stock by either Quantity or Amount. And Profit and Loss Comparison between shares, based on either Value or as a Percentage.  </li>
-      <br/>
-      <li><span style={purpleStyle}>Historical Data and Share Details:</span> Graphical Representation of Historical Data of a particular stock, as a candlestick chart.</li>
-    </ul>,
-      technology : <Typography variant='p'>
-        <ul>
-          <li><Purple>ReactJS</Purple> for the FrontEnd</li><br/>
-          <li><Purple>Redux</Purple> for Application State Management</li><br/>
-          <li><Purple>Bootstrap</Purple> for CSS and styling</li><br/>
-          <li><Purple>React-vis, RechartJS and Apex Charts</Purple> for data visualization</li><br/>
-          <li><Purple>Flask</Purple> for Backend</li><br/>
-          <li><Purple>SQLite3</Purple> for temporary storage of Scrip Data</li>
-        </ul>
-      </Typography>,
-      challenges: <>
-        <br/>
-        <Typography variant='h4' color='primary.light'>React-vis Labelling for Pie Charts</Typography><br/>
-        <Typography variant='p'>Initially, I went into the Project thinking using <Purple>React-Vis</Purple> was enough for all the type ofVisualization I might need in the Project. But I faced two issues pretty early on with React-Vis. One of the issues was regarding <Purple>Pie Charts</Purple>.
-        <br/><br/>(One thing to keep in mind is, Pie Charts in React-Vis are just <Purple>tweaked Radial Charts</Purple>.) 
-        <br/><br/>The issue that I had faced was that, there was no proper functionality for <Purple>Labelling the pie chart</Purple>. Although, it could be done with a lot of workaround, it wasn't exactly seamless, and it would needlessly consume time for developing this, especially considering that RechartJS had the exact solution that I was looking for (withanimations!) <br/><br/>Hence, I just went with <Purple>RechartJS for the Pie Charts</Purple>. </Typography>
-        <br/><br/><br/>
-        <Typography variant='h4' color='primary.light'>CandleStick data</Typography><br/>
-        <Typography variant='p'>As stated previously, I had intended to use just React-vis for all of my visualization needs in this Project. However, <Purple>React-vis</Purple> does not have a CandleStick type of chart, but as you might know, CandleSticks are very important in Share Price analysis (or even Crypto) for displaying <Purple>OHLC data</Purple> over a period of time. 
-        <br/><br/>This is where <Purple>Apex Charts</Purple> came in, because they had the best implementation of CandleSticks for React I have seen, and also a pretty good documentation. However, since by nature CandleSticks are more complicated than a regular type of chart, there were issues that I had faced within Apex Charts, nothing a bit of tweaking around won't fix though. 
-        <br/><br/>If you look at the <Purple>5Paisa</Purple> documentation for <Purple>Historical Data</Purple>, you can see that they don't send OHLC data via API for all time of day. <Purple>They specifically only send data for the time period the Stock Market is open</Purple>, which also eliminates Weekends, and other holidays. Hence that portion of the CandleStick was just sitting blank. So I had to tweak around a bit to display the CandleStick over a <Purple>discrete amount of time, instead of continuous</Purple>, and the issue was fixed. 
-        <br/><br/>Not to take anything away from React-vis though, it is still one of the best visualization tools I have seen for React, once I finished the Project. </Typography>
-        </>
-    }
-  }
+  // {
+  //   id:4,
+  //   title : <Typography variant='h3' color='secondary.light'>
+  //     Investment Portfolio
+  //   </Typography>,
+  //   image : require('./ProjectsImages/investments.jpg'),
+  //   content : <Typography variant='p' sx={{textAlign:'left', fontSize:16}}>
+  //   Self-Project for viewing and analyzing Investments made in Stock Market, including various types of visual representation of data. Application built in React, with Back-End using Flask. <br/>
+  //   There are API Calls to 5Paisa API in back-end. And used a localized SQLite DB for Temporary Storage. The Visual graphs were made using React-vis, RechartJS and Apex Charts.
+  //   </Typography>,
+  //   redirectUrl : '3',
+  //   skills : ['ReactJS', 'Flask', 'Python', 'Bootstrap', 'Git', 'React-Vis', 'RechartJS', 'Apex Charts'],
+  //   fullContent : {
+  //     title : <Typography variant = 'h2' color='secondary-light'>Investment Portfolio</Typography>,
+  //     description : <Typography variant='p'>
+  //       This was a Self Project that I came up with. This Web App is a visual representation of current and past <span style={purpleStyle}>Indian Stock Market Data</span>, along with Visual Representation of the Holdings that are currently owned by me. 
+  //       <br/><br/>
+  //       This Project was mainly required to perform Portfolio Analysis for myself based on Stock Market Data (NSE). Since I use <span style={purpleStyle}>5Paisa</span> as a Broker, I have used their <span style={purpleStyle}>Python SDK</span> in backend for acquiring the data. They also have APIs accessed via URLs and Node SDK as well, however I have used the Python SDK for two reasons : <br/> 
+  //       <ol>
+  //         <li>The SDK for NodeJS is not as good, with extremely limited functionality, and subpar documentation.</li><br/>
+  //         <li>My Choice for backend before going into the depths of the Project was <span style={purpleStyle}>Flask</span>. So an SDK for Python would have been a seamless experience, as compared to calling URLs. Besides, the Documentation for the Python SDK is quite good, might be even better than the URL based API itself.</li>
+  //       </ol>
+  //     </Typography>,
+  //     features : <ul>
+  //     <li><span style={purpleStyle}>Holding Details:</span> Quantity of a Particular stock, it's current Price, Cost, P/L Percentage and Amount etc. </li>
+  //     <br/>
+  //     <li><span style={purpleStyle}>Portfolio details:</span> How much of my total Portfolio is covered by a particular stock by either Quantity or Amount. And Profit and Loss Comparison between shares, based on either Value or as a Percentage.  </li>
+  //     <br/>
+  //     <li><span style={purpleStyle}>Historical Data and Share Details:</span> Graphical Representation of Historical Data of a particular stock, as a candlestick chart.</li>
+  //   </ul>,
+  //     technology : <Typography variant='p'>
+  //       <ul>
+  //         <li><Purple>ReactJS</Purple> for the FrontEnd</li><br/>
+  //         <li><Purple>Redux</Purple> for Application State Management</li><br/>
+  //         <li><Purple>Bootstrap</Purple> for CSS and styling</li><br/>
+  //         <li><Purple>React-vis, RechartJS and Apex Charts</Purple> for data visualization</li><br/>
+  //         <li><Purple>Flask</Purple> for Backend</li><br/>
+  //         <li><Purple>SQLite3</Purple> for temporary storage of Scrip Data</li>
+  //       </ul>
+  //     </Typography>,
+  //     challenges: <>
+  //       <br/>
+  //       <Typography variant='h4' color='primary.light'>React-vis Labelling for Pie Charts</Typography><br/>
+  //       <Typography variant='p'>Initially, I went into the Project thinking using <Purple>React-Vis</Purple> was enough for all the type ofVisualization I might need in the Project. But I faced two issues pretty early on with React-Vis. One of the issues was regarding <Purple>Pie Charts</Purple>.
+  //       <br/><br/>(One thing to keep in mind is, Pie Charts in React-Vis are just <Purple>tweaked Radial Charts</Purple>.) 
+  //       <br/><br/>The issue that I had faced was that, there was no proper functionality for <Purple>Labelling the pie chart</Purple>. Although, it could be done with a lot of workaround, it wasn't exactly seamless, and it would needlessly consume time for developing this, especially considering that RechartJS had the exact solution that I was looking for (withanimations!) <br/><br/>Hence, I just went with <Purple>RechartJS for the Pie Charts</Purple>. </Typography>
+  //       <br/><br/><br/>
+  //       <Typography variant='h4' color='primary.light'>CandleStick data</Typography><br/>
+  //       <Typography variant='p'>As stated previously, I had intended to use just React-vis for all of my visualization needs in this Project. However, <Purple>React-vis</Purple> does not have a CandleStick type of chart, but as you might know, CandleSticks are very important in Share Price analysis (or even Crypto) for displaying <Purple>OHLC data</Purple> over a period of time. 
+  //       <br/><br/>This is where <Purple>Apex Charts</Purple> came in, because they had the best implementation of CandleSticks for React I have seen, and also a pretty good documentation. However, since by nature CandleSticks are more complicated than a regular type of chart, there were issues that I had faced within Apex Charts, nothing a bit of tweaking around won't fix though. 
+  //       <br/><br/>If you look at the <Purple>5Paisa</Purple> documentation for <Purple>Historical Data</Purple>, you can see that they don't send OHLC data via API for all time of day. <Purple>They specifically only send data for the time period the Stock Market is open</Purple>, which also eliminates Weekends, and other holidays. Hence that portion of the CandleStick was just sitting blank. So I had to tweak around a bit to display the CandleStick over a <Purple>discrete amount of time, instead of continuous</Purple>, and the issue was fixed. 
+  //       <br/><br/>Not to take anything away from React-vis though, it is still one of the best visualization tools I have seen for React, once I finished the Project. </Typography>
+  //       </>
+  //   }
+  // }
 ]
 
 export default ProjectInformation
+
+export const SkillList = ['ReactJS', 'Flask', 'Python', 'Bootstrap', 'Git', 'React-Vis', 'RechartJS', 'Apex Charts',
+'NodeJS', 'SpringBoot', 'Java', 'SemanticUI', 'Redux']

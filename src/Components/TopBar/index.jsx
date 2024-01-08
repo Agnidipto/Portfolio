@@ -1,30 +1,60 @@
-import * as React from 'react';
+// import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
+import ScrollProgress from './ScrollProgress';
 
 import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+import './TopBar.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { unloadPage } from '../../reducers/initloadSlice';
 
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar(props) {
-  const [anchorElProjects, setAnchorElProjects] = React.useState(null);
+
+  const location = useLocation();
+  const [home, setHome] = useState(true)
+  const [opacity, setOpacity] = useState(1)
+  const [width, setWidth] = useState(270)
+
+  const initLoad = useSelector(state => state.initload.value)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      if (home===false)
+        setOpacity(0)
+        setTimeout(() => {
+          setHome(true)
+          setOpacity(1)
+          setWidth(270)
+        }, 500)
+    } else {
+      if (home===true) 
+        setOpacity(0)
+        setTimeout(() => {
+          setHome(false)
+          setOpacity(1)
+          setWidth(90)
+        }, 500)
+    }
+  }, [location])
+
   const navigate = useNavigate();
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElProjects(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = (page) => {
-    setAnchorElProjects(null);
+  const handleViewProjects = (event) => {
+    navigate('/projects')
   };
 
   const HomeButtonOnClick = (event) => {
@@ -55,16 +85,41 @@ function ResponsiveAppBar(props) {
     }
   }
 
+  ////////////////// Scroll Position Fading Information
 
-  var color = Math.min(props.positionTop/150,1)
+  const [scrollPosition, setScrollPosition] = useState(0);
 
-  var shadow1opacity = Math.min(props.positionTop/750, 0.2)
-  var shadow2opacity = Math.min(props.positionTop/1071.42, 0.14)
-  var shadow3opacity = Math.min(props.positionTop/1250, 0.12)
+  const handleScroll = () => {
+      const position = window.pageYOffset;
+      setScrollPosition(position);
+  }; 
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  var color = Math.min(scrollPosition/150,1)
+
+  var shadow1opacity = Math.min(scrollPosition/750, 0.2)
+  var shadow2opacity = Math.min(scrollPosition/1071.42, 0.14)
+  var shadow3opacity = Math.min(scrollPosition/1250, 0.12)
   var boxShadow= `0px 2px 4px -1px rgba(0,0,0,${shadow1opacity}), 0px 4px 5px 0px rgba(0,0,0,${shadow2opacity}), 0px 1px 10px 0px rgba(0,0,0,${shadow3opacity})`;
 
-  return (
-    <AppBar position="sticky" sx ={{height:65, minHeight:'63px', background: `rgba(18, 18, 18, ${color})`, boxShadow:boxShadow}}>
+  return (<>
+
+    <AppBar position="sticky" 
+    sx ={{height: !initLoad? 65 : 0,
+      opacity : !initLoad? 1 : 0, 
+      background: `rgba(18, 18, 18, ${color})`, boxShadow:boxShadow}}
+      className='main-bar'
+    >
+      
+      {/* <motion.div style={{scaleX:scrollYProgress, borderBottom:'2px solid white'}} className='progress-bar'/>
+      <p>{hookedYPostion}</p> */}
+      
       <Container maxWidth="xl">
         <Toolbar>
           
@@ -115,61 +170,52 @@ function ResponsiveAppBar(props) {
             <span onClick={(e) => navigate('/')} style={{cursor:'pointer'}}>Agni</span> 
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {props.location !== '/' ?
+            <div style={{opacity:opacity, width:width}} className='main-tabs no-overflow'>
+            {!home ?
               <Button
               onClick={(e) => HomeButtonOnClick(e)}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              // className='no-overflow'
+              sx={{ my: 2, color: 'white', display: 'block', minWidth:90 }}
             >
               Home
             </Button>: 
             <>
               <Button
               onClick={(e) => ProjectButtonOnClick(e)}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              // className='no-overflow'
+              sx={{ my: 2, color: 'white', display: 'block', minWidth:90 }}
               >
                 Projects
               </Button>
               <Button
               onClick={(e) => SkillButtonOnClick(e)}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              // className='no-overflow'
+              sx={{ my: 2, color: 'white', display: 'block', minWidth:90 }}
               >
                 Skills
               </Button>
               <Button
               onClick={(e) => AboutButtonOnClick(e)}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              // className='no-overflow'
+              sx={{ my: 2, color: 'white', display: 'block', minWidth:90 }}
               >
                 About Me
               </Button>
             </>}
-            <Divider orientation="vertical" flexItem sx={{marginLeft:'1%', marginRight:'2%'}}/>
+            </div>
+            <Divider orientation="vertical" flexItem sx={{marginLeft:'1%', marginRight:'2%', height:65}}/>
             <Button
-              onClick={handleOpenNavMenu}
+              onClick={handleViewProjects}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
               View Projects
             </Button>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorElProjects}
-              open={Boolean(anchorElProjects)}
-              onClose={handleCloseNavMenu}
-              MenuListProps={{
-                'aria-labelledby': 'basic-button',
-              }}
-            >
-                {props.skills.map((text, index) => (
-                  <div>
-                  <MenuItem key={index} disablePadding onClick={e=> {
-                    e.preventDefault()
-                    setAnchorElProjects(null);
-                    text==='All'? navigate('/projects') : navigate(`/projects/${text}`)}}>
-                    {text}
-                  </MenuItem>
-                  {text === 'All' ? <Divider sx={{borderColor : 'rgb(255 255 255 / 77%)'}}/>:<></>}
-                  </div>
-                ))}
-            </Menu>
+            {/* <Divider orientation="vertical" flexItem sx={{marginLeft:'1%', marginRight:'2%', height:65}}/>
+            <Button
+            onClick={(e) => dispatch(unloadPage())}
+            sx={{ my: 2, color: 'white', display: 'block' }}>
+              InitLoad
+            </Button> */}
             
           </Box>
 
@@ -178,7 +224,9 @@ function ResponsiveAppBar(props) {
           </Box>
         </Toolbar>
       </Container>
+      <ScrollProgress />
     </AppBar>
+    </>
   );
 }
-export default ResponsiveAppBar;
+export default React.memo(ResponsiveAppBar);

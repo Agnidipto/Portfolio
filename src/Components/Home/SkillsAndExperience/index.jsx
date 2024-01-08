@@ -141,22 +141,24 @@ function SkillsAndExperience(props) {
           Skills
         </Typography>
         
-        <Grid container columnSpacing={2} rowSpacing={2} 
-        sx={{paddingLeft:'2%', paddingRight:'2%', minHeight:{xs:'350px', md:'380px'}, transition:'all 0.5s ease'}}  
+        <Grid container columnSpacing={2} rowSpacing={0} 
+        sx={{paddingLeft:'2%', paddingRight:'2%', minHeight:{xs:'490px', md:'270px'}, transition:'all 0.5s ease'}}  
         alignItems="stretch" ref={skillsRef}>
         {SkillData.map((skill, index) => (
         <Slide in={isSkillsVisible} mountOnEnter unmountOnExit direction='right'
         style={{ transformOrigin: `0 0 0`, zIndex:SkillData.length-index, }}
           {...(isSkillsVisible ? { timeout: 200*(index+1) } : {})}>
           <Grid item md={3} xs={6} sx={{justifyContent:'center',}}>
-            <Card sx={{ maxWidth: 345, margin:'auto', height:'100%', width:'100%'}} onClick={e => navigate(skill.url)}>
+            <Card sx={{ maxWidth: 345, margin:'auto', width:'100%'}} onClick={e => navigate(skill.url)}>
               <CardActionArea sx={{ padding:0}}>
                 <CardMedia
                   children = {<>
-                     <Box sx={{ display: imageLoad[skill.head]? 'none' : 'flex', height:125, justifyContent:'center', alignItems: 'center' }}>
+                     <Box
+                     sx={{ display: imageLoad[skill.head]? 'none' : 'flex', 
+                     height:125, justifyContent:'center', alignItems: 'center', background:'#2a2057' }}>
                       <CircularProgress />
                     </Box>
-                    <img src={skill.image} style={{display: imageLoad[skill.head]? '' : 'none', height:125}} alt={skill.head}
+                    <img src={skill.image} style={{display: imageLoad[skill.head]? '' : 'none', width:'100%'}} alt={skill.head}
                     onLoad={() => setImageLoad({...imageLoad, [skill.head] : true})}/>
                   </>}
                 />
@@ -166,11 +168,11 @@ function SkillsAndExperience(props) {
                     {skill.head}
                   </Typography>
                   <Rating name="read-only" value={skill.rating} readOnly precision={0.5}/>
-                  {greaterThanMid ? 
+                  {/* {greaterThanMid ? 
                   <Typography variant="body2" color="text.secondary">
                     {skill.content}
                   </Typography>
-                  : <></>}
+                  : <></>} */}
                   </Box>
                 </CardContent>
               </CardActionArea>

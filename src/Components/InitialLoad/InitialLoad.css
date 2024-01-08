@@ -1,0 +1,8 @@
+.init-head {
+  transition : opacity 0.2s ease-in, font-size 2s ease-in;
+}
+
+.init-head-img {
+  transition : opacity 0.4s ease-in, height 3.1s ease-in
+}
+
