@@ -10,7 +10,7 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 function Footer(props) {
 
   return (
-    <Box sx={{background:'#303030', marginTop:10, color:'#787878', paddingTop:'15px', paddingBottom:'15px'}}>
+    <Box sx={{background:'#303030', marginTop:0, color:'#787878', paddingTop:'15px', paddingBottom:'15px'}}>
         <Typography>
           <a href='https://www.instagram.com/__agni_/'><InstagramIcon className='footer-link'/></a>
           <a href='https://www.linkedin.com/in/agnidipto-sinha'><LinkedInIcon className='footer-link'/></a>

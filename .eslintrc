@@ -1,0 +1,67 @@
+{
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "prettier"
+  ],
+  "rules": {
+    // Code Style & Formatting
+    "space-infix-ops": "error",
+    "arrow-spacing": ["warn", { "before": true, "after": true }],
+    "indent": ["warn", 2],
+    "react/jsx-indent": ["warn", 2],
+    "react/jsx-indent-props": ["warn", 2],
+    "key-spacing": ["warn", { "beforeColon": false, "afterColon": true }],
+    "object-curly-spacing": ["warn", "always"],
+    "semi": ["warn", "always"],
+    "comma-dangle": ["warn", "always-multiline"],
+    "no-multiple-empty-lines": ["warn", { "max": 1 }],
+    "no-trailing-spaces": "warn",
+    
+    // Code Quality
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "no-console": "warn",
+    "no-debugger": "warn",
+    "no-alert": "warn",
+    "no-var": "warn",
+    "prefer-const": "warn",
+    "no-duplicate-imports": "warn",
+    
+    // Best Practices
+    "eqeqeq": ["warn", "always"],
+    "curly": ["warn", "all"],
+    "no-eval": "warn",
+    "no-implied-eval": "warn",
+    "no-new-func": "warn",
+    "no-return-assign": "warn",
+    "no-self-compare": "warn",
+    "no-throw-literal": "warn",
+    "no-unused-expressions": "warn",
+    
+    // React Specific (since you"re using React)
+    "react/jsx-uses-vars": "warn",
+    "react/jsx-uses-react": "warn",
+    "react/jsx-key": "warn",
+    "react/jsx-no-duplicate-props": "warn",
+    "react/jsx-no-undef": "error",
+    "react/jsx-pascal-case": "warn",
+    "react/no-direct-mutation-state": "warn",
+    "react/no-unknown-property": "warn",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  }
+}

@@ -6,7 +6,7 @@
   backdrop-filter: blur(13.2px);
   -webkit-backdrop-filter: blur(13.2px);
   border: 1px solid rgba(174, 174, 174, 0.08);
-  transition: all 0.7s ease-in
+  transition: all 0.7s ease-in, transform 0.05s ease-in
   }
 
 .header-image {
@@ -43,4 +43,17 @@
 
 .github-button:hover {
   color : white
+}
+
+.profile-img {
+  /* border-radius: 10px ;  */
+  height: calc(100vh - 65px) ;
+  max-width: 100%;
+  object-fit: cover;
+  /* position: sticky;
+  top:65px */
+}
+
+.full-height {
+  height: calc(100vh - 65px)
 }

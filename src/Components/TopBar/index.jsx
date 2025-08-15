@@ -17,6 +17,7 @@ import { useLocation } from 'react-router-dom';
 import './TopBar.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { unloadPage } from '../../reducers/initloadSlice';
+import scrollTo from '../Utils/scrollTo';
 
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 

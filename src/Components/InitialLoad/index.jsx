@@ -9,10 +9,14 @@ import TechStack from './TechStack'
 const SLIDES = ['Hi there!', '', 'This is Agnidipto.']
 
 const IMAGES = [require('./images/react.png'), 
+require('./images/nextjs.png'),
+require('./images/tensorflow.png'),
+require('./images/pytorch.png'),
 require('./images/spring-boot.png'),
 require('./images/python.png'),
 require('./images/flask.png'),
-require('./images/redux.png')]
+// require('./images/redux.png'),
+]
 
 function InitialLoad(props) {
 
@@ -20,6 +24,7 @@ function InitialLoad(props) {
   const [opacity, setOpacity] = useState(0)
   const [display, setDisplay] = useState('none')
   const [height, setHeight] = useState(120)
+  const changeTime = 250
 
   const dispatch = useDispatch()
 
@@ -86,7 +91,7 @@ function InitialLoad(props) {
   }, [show])
 
   async function changePic() {
-    await timeout(400)
+    await timeout(changeTime)
     setIndex(prev => prev<IMAGES.length-1? prev+1 : 0)
   }
 

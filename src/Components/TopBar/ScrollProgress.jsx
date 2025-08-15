@@ -12,7 +12,7 @@ function ScrollProgress(props) {
       document.documentElement.clientHeight);
     const scrolled = Math.round(scrollPx / winHeightPx * 500) * 0.2;
 
-    console.log(scrolled)
+    // console.log(scrolled)
 
     setLoadedPerc(scrolled)
 
