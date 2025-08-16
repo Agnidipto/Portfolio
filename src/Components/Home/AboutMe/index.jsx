@@ -32,7 +32,7 @@ function AboutMe() {
                 aboutInView={aboutInView}
                 secondInView={secondInView}
               />
-              <MyJourney direction='alternate' secondRef={secondRef}/>
+              <MyJourney direction='left' secondRef={secondRef}/>
 
             </Box>
           </Grid>

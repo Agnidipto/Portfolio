@@ -9,6 +9,10 @@
   box-shadow: 0px 2px 10px #000000;
 }
 
+.dark-bg-no-shadow {
+  background-color: rgb(14, 14, 14);
+}
+
 body {
   /* overflow-x: hidden; */
   /* overflow-y: auto; */

@@ -1,4 +1,4 @@
-import { Typography, useMediaQuery, useTheme } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 import SectionHeader from "../../../Common/SectionHeader";
 
 const Heading = () => {

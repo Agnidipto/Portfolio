@@ -165,7 +165,60 @@ const ProjectInformation = [
       </>,
     },
   },
-  //
+];
+
+export const Experience = [
+  {
+    org: 'Amazon',
+    time: '2025',
+    orgLogo: '/images/home/experience/aws.png',
+    title: 'SWE Intern',
+    contents: [
+      <>Architected <Purple>Multi-Queue Job Search</Purple> feature for <PurpleLink href={'https://aws.amazon.com/batch/'}>AWS Batch</PurpleLink> console using <Purple>React/Redux</Purple>, improving search efficiency for large-scale batch computing jobs.</>,
+      <>Enhanced Job Search with <Purple>Persistent Search</Purple> functionality using <Purple>React Router v5</Purple> and URL parameters.</>,
+    ],
+  },
+  {
+    org: 'University of Illinois Chicago',
+    time: '2024-Present',
+    orgLogo: '/images/home/experience/uic.png',
+    title: "Master's in Computer Science",
+    contents: [
+      <>Maintaining <Purple>4.0 GPA</Purple> while specializing in <Purple>Natural Language Processing</Purple>, <Purple>LLMs</Purple>, and <Purple>Deep Learning</Purple>.</>,
+      <>Focusing on advanced <Purple>AI/ML research</Purple> and <Purple>distributed systems architecture</Purple>.</>,
+    ],
+  },
+  {
+    org: 'Capgemini',
+    time: '2021-2023',
+    orgLogo: '/images/home/experience/capgemini.png',
+    title: 'Senior Software Engineer',
+    contents: [
+      <>Developed <Purple>Python automations</Purple> for data collection/analysis, reducing manual efforts by <Purple>50%</Purple> across teams.</>,
+      <>Built web scraping solutions with <Purple>Selenium/BeautifulSoup</Purple> for KPI reporting, cutting report generation time by <Purple>90%</Purple>.</>,
+      <>Collaborated with <Purple>cross-platform</Purple> teams to implement business <Purple>KPI tracking systems</Purple> using Python, Selenium, and PyExcel.</>,
+    ],
+  },
+  {
+    org: 'Capgemini',
+    time: '2021',
+    orgLogo: '/images/home/experience/capgemini.png',
+    title: 'SWE Intern',
+    contents: [
+      <>Developed <Purple>web-based quiz platform</Purple> using <Purple>React, Spring Boot</Purple>, and <Purple>PostgreSQL</Purple> for educational institutions.</>,
+      <>Implemented user authentication, quiz creation, automated grading, and real-time result tracking features.</>,
+    ],
+  },
+  {
+    org: 'Freelancer',
+    time: '2020 - 2021',
+    orgLogo: '/images/home/experience/freelancer.png',
+    title: 'Full-Stack Developer',
+    contents: [
+      <>Delivered <Purple>responsive</Purple>, high-quality web applications including <Purple>art blog platform</Purple> and <Purple>real-estate marketplace</Purple>.</>,
+      <>Built <Purple>end-to-end solutions</Purple> connecting buyers/sellers with comprehensive property information systems.</>,
+    ],
+  },
 ];
 
 export default ProjectInformation;
