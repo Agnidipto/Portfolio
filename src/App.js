@@ -1,6 +1,8 @@
 import './App.css';
 import { useState, useRef, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { analytics } from './firebase';
+import { logEvent } from 'firebase/analytics';
 
 import TopBar from '../src/Components/TopBar';
 import SideDrawer from './Components/SideDrawer';
@@ -71,6 +73,15 @@ function App() {
       navigate('/');
     }
   }, [initLoad]);
+
+  useEffect(() => {
+    // Track page views
+    logEvent(analytics, 'page_view', {
+      page_title: document.title,
+      page_location: window.location.href,
+      page_path: location.pathname
+    });
+  }, [location]);
 
   // useEffect(() => {
   //   dispatch(loadPage())
