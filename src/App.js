@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { AnimatePresence } from 'framer-motion';
 
+import sendNotificationWithLocation from './utils/sendNotification';
+
 export const theme = createTheme({
   palette: {
     mode: 'dark',
@@ -76,16 +78,27 @@ function App() {
 
   useEffect(() => {
     // Track page views
-    logEvent(analytics, 'page_view', {
-      page_title: document.title,
-      page_location: window.location.href,
-      page_path: location.pathname
-    });
-  }, [location]);
+    if (analytics) {
+      logEvent(analytics, 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: location.pathname,
+      });
+    }
 
-  // useEffect(() => {
-  //   dispatch(loadPage())
-  // }, [])
+    if (window.location.hostname.includes('localhost') || window.location.hostname.includes('127.0.0.1')) {
+      return;
+    }
+
+    // Check if email already sent in this session
+    const emailSent = sessionStorage.getItem('portfolioEmailSent');
+    if (emailSent) {
+      return;
+    }
+    sendNotificationWithLocation(location);
+    sessionStorage.setItem('portfolioEmailSent', 'true');
+
+  }, [location]);
 
   return (
     <ThemeProvider theme={theme}>
